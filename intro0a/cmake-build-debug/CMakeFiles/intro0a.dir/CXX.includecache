@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/User/Documents/GitHub/OOP/intro0a/main.cpp
+module1.h
+C:/Users/User/Documents/GitHub/OOP/intro0a/module1.h
+module2.h
+C:/Users/User/Documents/GitHub/OOP/intro0a/module2.h
+module3.h
+C:/Users/User/Documents/GitHub/OOP/intro0a/module3.h
+iostream
+-
+
+C:/Users/User/Documents/GitHub/OOP/intro0a/module1.h
+string
+-
+
+C:/Users/User/Documents/GitHub/OOP/intro0a/module2.h
+string
+-
+
+C:/Users/User/Documents/GitHub/OOP/intro0a/module3.cpp
+module3.h
+C:/Users/User/Documents/GitHub/OOP/intro0a/module3.h
+
+C:/Users/User/Documents/GitHub/OOP/intro0a/module3.h
+string
+-
+
