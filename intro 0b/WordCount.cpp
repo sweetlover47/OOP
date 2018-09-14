@@ -3,11 +3,8 @@
 void WordCount::universalize(char* &word) {
     int i = 0;
     while (i < strlen(word) && word[i] > 0) {
-
-        if ((word[i] > 96 && word[i] < 123) || (word[i] > 64 && word[i] < 91) || (word[i] > 47 && word[i] < 58)) {
-            if ((word[i] - 'a' < 0) && (word[i] > 60)) {
-                word[i] = word[i] - 'A' + 'a';
-            }
+        if ((word[i] - 'a' < 0) && (word[i] > 60)) {
+            word[i] = word[i] - 'A' + 'a';
         }
         i++;
     }
