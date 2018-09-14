@@ -14,7 +14,7 @@ private:
     multimap<string, int> WordMap;
 
     void universalize(char *&word);
-
+    void split(string &str);
 public:
     void read(istream &in);
 
