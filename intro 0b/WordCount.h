@@ -12,7 +12,6 @@ class WordCount {
 private:
     int total = 0;
     multimap<string, int> WordMap;
-
     void universalize(char *&word);
     void split(string &str);
 public:

@@ -6,10 +6,6 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/User/Documents/GitHub/OOP/intro 0b/WordCount.cpp
-WordCount.h
-C:/Users/User/Documents/GitHub/OOP/intro 0b/WordCount.h
-
 C:/Users/User/Documents/GitHub/OOP/intro 0b/WordCount.h
 fstream
 -
@@ -23,4 +19,8 @@ cstdio
 -
 map
 -
+
+C:/Users/User/Documents/GitHub/OOP/intro 0b/main.cpp
+WordCount.h
+C:/Users/User/Documents/GitHub/OOP/intro 0b/WordCount.h
 
