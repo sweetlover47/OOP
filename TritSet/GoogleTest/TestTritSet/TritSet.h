@@ -44,7 +44,7 @@ public:
 	TritSet operator ~();
 
 	size_t length();
-	size_t capacity();
+	const size_t capacity();
 	size_t  cardinality(Trit value);
 	unordered_map < Trit, int, hash<int> > cardinality();
 	void shrink();

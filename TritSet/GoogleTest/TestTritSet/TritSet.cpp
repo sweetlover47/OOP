@@ -43,6 +43,7 @@ TritSet& TritSet::operator=(TritSet&& other)
 {
 	last = other.last;
 	array = other.array;
+	array.reserve(other.array.capacity());
 	other.array.clear();
 	return *this;
 }
@@ -157,10 +158,11 @@ size_t TritSet::length()
 			answer += i + 1;
 		return answer;
 	}
-	else return 0;
+	else 
+		return 0;
 }
 
-size_t TritSet::capacity()
+const size_t TritSet::capacity()
 {
 	return array.capacity() * element;
 }
