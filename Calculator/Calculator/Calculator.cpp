@@ -5,6 +5,7 @@
 #include <string>
 #include <sstream>
 #include <iostream>
+#include <memory>
 
 void Calculator::run(istream &in)
 {
@@ -26,8 +27,7 @@ void Calculator::run(istream &in)
 			}
 			try
 			{
-				Command *cmd = CommandFactory::getInstance().getCommand(operation);
-
+				auto_ptr<Command> cmd = static_cast <auto_ptr<Command>>(CommandFactory::getInstance().getCommand(operation));
 				cmd->execute(context, arguments);
 				arguments.clear();
 			}
