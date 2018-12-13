@@ -21,7 +21,7 @@ private:
 	std::pair<int, int> statistics = std::make_pair(0, 0);
 	std::vector<std::vector<int>> firstPlayerMap;
 	std::vector<std::vector<int>> secondPlayerMap;
-	std::vector<std::pair<int, int>> ship;
+	std::vector<std::pair<int, int>> ship1, ship2;
 	void setKill(std::pair<int, int> cell);
 
 public:
@@ -53,7 +53,7 @@ public:
 	void setInjure(std::pair<int, int> cell);
 	void setMiss(std::pair<int, int> cell);
 	bool isWin();
-
+	std::vector<std::pair<int, int>> *ship();
 	std::vector<std::vector<int>> *map();
 	std::vector<std::vector<int>> privatize();
 };

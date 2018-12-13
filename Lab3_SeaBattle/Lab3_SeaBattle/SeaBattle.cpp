@@ -30,6 +30,7 @@ void SeaBattle::run(Gamer *first, Gamer *second)
 			second->checkCell(secondView, controller);
 			secondView->show(controller);
 		}
+		controller->setPlayer(0);
 		if (first->isWin(controller))
 			std::cout << "First player is win" << std::endl;
 		else

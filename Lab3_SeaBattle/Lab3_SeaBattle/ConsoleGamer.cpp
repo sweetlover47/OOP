@@ -92,8 +92,11 @@ void ConsoleGamer::checkCell(GameView *console, Controller *controller)
 				controller->setMiss(cell);
 		console->show(controller);
 		std::cout << "Attack!" << std::endl;
-		std::cin >> point;
-		cell = parser(point);
+		do
+		{
+			std::cin >> point;
+			cell = parser(point);
+		} while (cell.first < 0 || cell.first > 9 || cell.second < 0 || cell.second > 9);
 		std::cout << "Check (" << cell.first << ";" << cell.second << ")" << std::endl;  //ConsoleViewMessage: Проверена клетка ( ; )
 	} while (controller->alreadyChecked(cell) || controller->isShip(cell));
 	controller->setMiss(cell);

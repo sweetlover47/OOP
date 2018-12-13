@@ -311,6 +311,7 @@ void OptimalGamer::setSubmarine(Controller *controller)
 		y = mersene() % 6;
 		start = std::make_pair(x + 2, y + 2);
 	} while (controller->isShip(start, start) || x == y || x == 9 - y);
+	controller->setShip(start, start);
 	return;
 }
 
@@ -339,8 +340,9 @@ void OptimalGamer::checkCell(GameView *view, Controller *controller)
 			controller->setMiss(cell);
 		cell = generateTurn(controller);
 		std::cout << "Check (" << cell.first << ";" << cell.second << ")" << std::endl; //ConsoleViewMessage: Проверена клетка ( ; )
-	} while (controller->alreadyChecked(cell) || controller->isShip(cell));
-	controller->setMiss(cell);
+	} while ((controller->alreadyChecked(cell) || controller->isShip(cell)) && !isWin(controller));
+	if (!isWin(controller))
+		controller->setMiss(cell);
 	std::cout << ""; // ConsoleViewMessage: мимо!
 }
 
@@ -395,37 +397,55 @@ std::pair<int, int> OptimalGamer::crowsFeet(Controller *controller)
 			{
 				cell = std::make_pair(tableBattleShip.front() % 10, tableBattleShip.front() / 10);
 				tableBattleShip.pop_front();
-			} while (controller->alreadyChecked(cell));
-			if (controller->isKilled(cell))
+			} while (!tableBattleShip.empty() && !isWin(controller) && controller->alreadyChecked(cell));
+			if (tableBattleShip.empty())
+				goto nextB;
+			else
+				if (controller->isKilled(cell))
 				--prBattleShip;
 		}
 	}
 	else if (prCruiser)
 	{
+		nextB:
 		if (tableCruiser.empty())
 			prCruiser = 0;
-		do
+		else
 		{
-			cell = std::make_pair(tableCruiser.front() % 10, tableCruiser.front() / 10);
-			tableCruiser.pop_front();
-		} while (controller->alreadyChecked(cell));
-		if (controller->isKilled(cell))
-			--prCruiser;
+			do
+			{
+				cell = std::make_pair(tableCruiser.front() % 10, tableCruiser.front() / 10);
+				tableCruiser.pop_front();
+			} while (!tableCruiser.empty() && !isWin(controller) && controller->alreadyChecked(cell));
+			if (tableCruiser.empty())
+				goto nextC;
+			else
+				if (controller->isKilled(cell))
+				--prCruiser;
+		}
 	}
 	else if (prDestroyer)
 	{
+		nextC:
 		if (tableDestroyer.empty())
 			prDestroyer = 0;
-		do
+		else
 		{
-			cell = std::make_pair(tableDestroyer.front() % 10, tableDestroyer.front() / 10);
-			tableDestroyer.pop_front();
-		} while (controller->alreadyChecked(cell));
-		if (controller->isKilled(cell))
-			--prDestroyer;
+			do
+			{
+				cell = std::make_pair(tableDestroyer.front() % 10, tableDestroyer.front() / 10);
+				tableDestroyer.pop_front();
+			} while (!tableDestroyer.empty() && !isWin(controller) && controller->alreadyChecked(cell));
+			if (tableDestroyer.empty())
+				goto nextD;
+			else
+				if (controller->isKilled(cell))
+				--prDestroyer;
+		}
 	}
 	else
 	{
+		nextD:
 		std::random_device rd;
 		std::mt19937 mersene(rd());
 		do
@@ -433,7 +453,7 @@ std::pair<int, int> OptimalGamer::crowsFeet(Controller *controller)
 			int x = mersene() % 10;
 			int y = mersene() % 10;
 			cell = std::make_pair(x, y);
-		} while (controller->alreadyChecked(cell));
+		} while (!isWin(controller) && controller->alreadyChecked(cell));
 		if (controller->isKilled(cell))
 			--prSubmarine;
 	}
